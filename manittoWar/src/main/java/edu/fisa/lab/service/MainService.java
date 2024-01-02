@@ -22,19 +22,12 @@ public class MainService {
 	@Autowired
 	BoardDAO boardDAO;
 	
-//	public ArrayList<String> myNameAndManitto(String name) {
-//		ArrayList<String> list = new ArrayList<>();
-//		Student student = studentDAO.findById(id).orElseThrow();
-//		
-//		Student target = studentDAO.findById(student.getTargetId()).orElseThrow();
-//		
-//		StudentResDto studentResDto = new StudentResDto(target.getName());
-//		String targetName = studentResDto.getName();
-//		list.add(student.getName());
-//		list.add(targetName);
-//		
-//		return list;
-//	}
+	public String myNameAndManitto(String name) {
+		Student me = studentDAO.findByName(name);
+		long targetId = me.getTargetId();
+		String targetName = studentDAO.findById(targetId);
+		return targetName;
+	}
 	
 	public boolean isValidUser(String userId, String userPw) {
 		Student student = studentDAO.findByName(userId);

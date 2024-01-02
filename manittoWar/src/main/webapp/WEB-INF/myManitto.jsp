@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,12 +54,16 @@ img {
 	</div>
 
 	<h2>나의 마니또</h2>
-	<div th:if="${manitto}" class="message">
-		<p th:text="${'내 마니또는 ' + manitto + ' 입니다.'}"></p>
-	</div>
-	<div th:unless="${manitto}" class="message">
-		<p>아직 마니또가 배정되지 않았습니다.</p>
-	</div>
+	<c:if test="${not empty manitto}">
+	    <div class="message">
+	        <p>내 마니또는 <c:out value="${manitto}" /> 입니다.</p>
+	    </div>
+	</c:if>
+	<c:if test="${empty manitto}">
+	    <div class="message">
+	        <p>아직 마니또가 배정되지 않았습니다.</p>
+	    </div>
+	</c:if>
 
 	<!-- 수정된 myPage로 이동하는 버튼 -->
 	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
