@@ -1,5 +1,7 @@
 package edu.fisa.lab.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,6 +48,18 @@ public class Controller {
 			return "/myManitto"; 
 		}
 	}
+	
+	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
+	public String readBoard(Model model) {
+		List readBoardList = service.boardFindAll();
+		if(readBoardList != null) {
+			model.addAttribute("readBoard", readBoardList);
+			return "/readBoard";
+		}else {
+			return "/readBoard";
+		}
+	}
+
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {
