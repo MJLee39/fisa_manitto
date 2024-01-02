@@ -66,7 +66,7 @@ body {
 			확인하기</button>
 		<button class="button" onclick="goToPage('writeBoard.html')">편지
 			게시하기</button>
-		<button class="button" onclick="goToPage('readBoard.html')">편지 보기</button>
+		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>
 
 	<div>
