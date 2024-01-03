@@ -52,6 +52,12 @@ public class MainService {
 		return boardDAO.findAll();
 	}
 	
+
+	public void saveBoard(BoardDTO insertBoard) {
+	    Board board = insertBoard.toEntity();
+	    boardDAO.save(board);
+	}
+	
 	public List<Student> findAllStudent(){
 		return studentDAO.findAll();
 	}

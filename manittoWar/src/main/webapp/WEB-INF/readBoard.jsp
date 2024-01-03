@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,22 +51,18 @@ button {
 </style>
 </head>
 <body>
-	<h2>게시판 조회</h2>
-
-
-		<c:if test="${not empty boardList}">
+	<h2>마니또에게 보내는 편지</h2>
+	<c:if test="${not empty readBoard}">
 	    <table>
 	        <thead>
 	            <tr>
-	                <th>ID</th>
 	                <th>제목</th>
 	                <th>내용</th>
 	            </tr>
 	        </thead>
 	        <tbody id="boardTableBody">
-	            <c:forEach var="board" items="${boardList}">
+	            <c:forEach var="board" items="${readBoard}">
 	                <tr>
-	                    <td>${board.id}</td>
 	                    <td>${board.title}</td>
 	                    <td>${board.content}</td>
 	                </tr>
@@ -73,7 +70,7 @@ button {
 	        </tbody>
 	    </table>
 	</c:if>
-	<c:if test="${empty boardList}">
+	<c:if test="${empty readBoard}">
 	    <div class="message">
 	        <p>게시글이 없습니다.</p>
 	    </div>
@@ -82,27 +79,7 @@ button {
 	<button onclick="goToMyPage()">마이페이지</button>
 
 	<script>
-/*     // 게시글 데이터
-    const boardData = [
-      { boardId: 1, title: '첫 번째 글', content: '첫 번째 글의 내용' },
-      { boardId: 2, title: '두 번째 글', content: '두 번째 글의 내용' },
-      { boardId: 3, title: '세 번째 글', content: '세 번째 글의 내용' }
-      // ... 게시글 데이터가 더 있다고 가정합니다.
-    ];
 
-    // 게시글 테이블에 데이터 추가
-    const boardTableBody = document.getElementById('boardTableBody');
-    boardData.forEach(board => {
-      const row = `
-        <tr>
-          <td>${board.boardId}</td>
-          <td>${board.title}</td>
-          <td>${board.content}</td>
-        </tr>
-      `;
-      boardTableBody.innerHTML += row;
-    });
- */
     // 마이페이지로 이동하는 함수
     function goToMyPage() {
       window.location.href = '/myPage.html';
