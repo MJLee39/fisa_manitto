@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.fisa.lab.DAO.BoardDAO;
 import edu.fisa.lab.DAO.StudentDAO;
+import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Board;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.resDto.StudentResDto;

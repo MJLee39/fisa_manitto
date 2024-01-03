@@ -37,7 +37,7 @@ th {
 	background-color: #f2f2f2;
 }
 
-button {
+.myPageButton {
 	padding: 10px 20px;
 	background-color: #3498db;
 	color: white;
@@ -47,6 +47,18 @@ button {
 	position: absolute;
 	top: 20px;
 	right: 20px;
+}
+
+.homeButton {
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 20px;
 }
 </style>
 </head>
@@ -76,10 +88,16 @@ button {
 	    </div>
 	</c:if>
 
-	<button onclick="goToMyPage()">마이페이지</button>
+	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
+	<button class="homeButton" onclick="goToHome()">홈</button>
 
 	<script>
 
+	 // 홈으로 이동하는 함수
+    function goToHome() {
+      window.location.href = 'main.jsp';
+    }
+	
     // 마이페이지로 이동하는 함수
     function goToMyPage() {
       window.location.href = '/myPage.html';

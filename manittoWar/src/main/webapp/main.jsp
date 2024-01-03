@@ -37,7 +37,8 @@ h2 {
 
 /* 새로운 CSS */
 #hideButton {
-	margin-top: 20px;
+	justify-content: center;
+
 	padding: 10px 20px;
 	background-color: #3498db;
 	color: white;
@@ -53,6 +54,7 @@ body {
 	filter: none; /* 흐림 효과 제거 */
 }
 .button {
+justify-content: center;
   display: inline-block;
   padding: 5px 10px;
   font-size: 16px;
@@ -86,7 +88,7 @@ body {
 		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>
 
-	<div>
+	<div class="button-container">
 		<button id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
 		<button class="button" onclick="goToPage('myPage')">마이페이지</button>
 	</div>
