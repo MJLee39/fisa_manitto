@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+
 import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.service.MainService;
@@ -17,27 +18,22 @@ public class RestController {
 	
 	@Autowired
 	MainService service;
-//	@PostMapping("/createManittoEndpoint")
-//	public List<String[]> selectAll (){
-//		List<Student> list = service.findAllStudent();
-//		return service.createManitto(list);
-//	}
-//	
-//	@PostMapping("/allManittoEndpoint")
-//	public List<String[]> readAll (){
-//		List<Student> list = service.findAllStudent();
-//		return service.readManitto(list);
-//	}
+
 	
 	@PostMapping("/writeBoard")
 	public void writeBoard(BoardDTO insertBoard) throws Exception{
 		service.saveBoard(insertBoard);
 	}
 	
-//	@ExceptionHandler
-//	public String handler(Exception e) {
-//		e.printStackTrace();
-//		
-//		return null;
-//	}
+	@PostMapping("/createManittoEndpoint")
+	public List<String[]> selectAll (){
+		List<Student> list = service.findAllStudent();
+		return service.createManitto(list);
+	}
+	
+	@PostMapping("/allManittoEndpoint")
+	public List<String[]> readAll (){
+		List<Student> list = service.findAllStudent();
+		return service.readManitto(list);
+	}
 }

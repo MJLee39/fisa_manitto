@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -51,6 +53,7 @@ th {
 </head>
 <body>
 	<button type="button" onclick="createManitto()">마니또 생성하기</button>
+
 	<div id="allView"></div>
 
 	<script>
@@ -71,16 +74,20 @@ th {
 								<table>
 								<thead>
 								<tr>
+									<th>ID</th>
 									<th>이름</th>
-									<th>마니또 이름</th>
+									<th>Target ID</th>
+									<th>Target 이름</th>
 								</tr>
 							</thead>
 							<tbody>`;
 							
 							for (let i in data){
 								tableElement = tableElement + `<tr>
-							 		<td>${data[i][0]}</td>
-							 		<td>${data[i][1]}</td>
+							 		<td>${data[i].id}</td>
+							 		<td>${data[i].name}</td>
+							 		<td>${data[i].targetId}</td>
+							 		<td>fa</td>
 							    </tr>`;
 							}
 							
@@ -95,11 +102,9 @@ th {
 			        }
 			    };
 	
-			    xhr.open('POST', 'createManittoEndpoint');
-			   
-			    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-				
-				xhr.send();
+			    xhr.open('GET', '/createManittoEndpoint');
+			    
+			    xhr.send();
 		}
 	</script>
 </body>

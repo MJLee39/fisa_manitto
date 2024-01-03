@@ -13,5 +13,4 @@ public interface BoardDAO extends JpaRepository<Board, Long>{
 
 	
 	List<Board> findAll();
-	
 }
