@@ -15,10 +15,6 @@ spring:
     hibernate:
       ddl-auto: none
     show-sql: true
-  thymeleaf:        # Thymeleaf 설정 추가
-    prefix: classpath:/templates/
-    suffix: .html
-    cache: false      # 개발 중에는 캐시를 비활성화하는 것이 좋습니다.
   mvc:
     view:
       prefix: /WEB-INF/  # JSP 설정은 여전히 유지되어야 합니다.

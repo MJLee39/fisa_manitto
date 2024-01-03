@@ -66,11 +66,12 @@ body {
 			확인하기</button>
 		<button class="button" onclick="goToPage('writeBoard.html')">편지
 			게시하기</button>
-		<button class="button" onclick="goToPage('readBoard.html')">편지 보기</button>
+		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>
 
 	<div>
 		<button id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
+		<button onclick="goToPage('myPage')">마이페이지</button>
 	</div>
 
 	<script>
