@@ -58,13 +58,13 @@ body {
 <body>
 	<h2>마니또</h2>
 	<div class="img-container">
-		<img alt="" src="images/giftbox_close.png" width="200" height="200">
+		<img alt="" src="images/giftbox_close.gif" width="200" height="200">
 	</div>
 
 	<div class="button-container">
 		<button class="button" onclick="goToPage('myManitto')">내 마니또
 			확인하기</button>
-		<button class="button" onclick="goToPage('writeBoard.html')">편지
+		<button class="button" onclick="goToPage('writeBoard.html')">편지 
 			게시하기</button>
 		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>

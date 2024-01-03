@@ -61,10 +61,10 @@ button {
 	<h2>게시글 쓰기</h2>
 
 	<form id="postForm">
-		<label for="title">제목:</label><br> <input type="text" id="title"
-			name="title"><br>
+		<label for="title">제목:</label><br> 
+			<input type="text" id="title" name="title"><br>
 		<br> <label for="content">내용:</label><br>
-		<textarea id="content" name="content" rows="4" cols="50"></textarea>
+			<textarea id="content" name="content" rows="4" cols="50">dswgwgw</textarea>
 		<br>
 		<br>
 
@@ -74,17 +74,26 @@ button {
 	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
 
 	<script>
-		function submitPost() {
-			const title = document.getElementById('title').value;
-			const content = document.getElementById('content').value;
+	function submitPost() {
+		console.log('submitPost()');
+		alert(content.value);
+		alert(content.firstChild.nodeValue);
+        const title = document.getElementById('title').value;
+        const content = document.getElementById('content').value;
 
-			// 실제로는 서버로 게시글을 전송하는 로직을 구현해야 합니다.
-			// 여기서는 콘솔에 출력하는 예시를 보여드리겠습니다.
-			console.log('제목:', title);
-			console.log('내용:', content);
-
-			// 여기에 서버로 게시글을 전송하는 로직을 추가해야 합니다.
-		}
+        // AJAX를 사용하여 서버에 데이터를 전송
+     /*    const xhttp = new XMLHttpRequest();
+        xhttp.open('POST', '/writeBoard', true);
+        xhttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhttp.onreadystatechange = function () {
+            if (xhttp.readyState === 4 && xhttp.status === 200) {
+                console.log('게시글이 성공적으로 서버에 전송되었습니다.');
+            }
+        };
+        
+        const formData = `title=${encodeURIComponent(title)}&content=${encodeURIComponent(content)}`;
+    */   // xhttp.send(formData);
+    }
 
 		function goToMyPage() {
 			window.location.href = '/myPage.html';

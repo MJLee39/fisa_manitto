@@ -4,10 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
+
+import edu.fisa.lab.domain.entity.Board;
 import edu.fisa.lab.service.MainService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
@@ -51,7 +55,8 @@ public class Controller {
 	
 	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
 	public String readBoard(Model model) {
-		List readBoardList = service.boardFindAll();
+		List<Board> readBoardList = service.boardFindAll();
+		//System.out.println("*****"+readBoardList.get(0).getContent());
 		if(readBoardList != null) {
 			model.addAttribute("readBoard", readBoardList);
 			return "/readBoard";
@@ -59,7 +64,7 @@ public class Controller {
 			return "/readBoard";
 		}
 	}
-
+	
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {
