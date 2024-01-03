@@ -63,6 +63,7 @@ public class Controller {
 		}
 	}
 	
+<<<<<<< HEAD
 	@RequestMapping(path = "/logout", method = RequestMethod.GET)
 	public String logout(HttpSession session) {
 		session.removeAttribute("name"); // 이름 정보 삭제
@@ -74,6 +75,11 @@ public class Controller {
 	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
 	public String readBoard(Model model) {
 		List<Board> readBoardList = service.boardFindAll();
+=======
+	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
+	public String readBoard(Model model) {
+		List readBoardList = service.boardFindAll();
+>>>>>>> d8bbbe2a70f47a2cd284444c7c94936361e66b45
 		if(readBoardList != null) {
 			model.addAttribute("readBoard", readBoardList);
 			return "/readBoard";
@@ -81,7 +87,11 @@ public class Controller {
 			return "/readBoard";
 		}
 	}
+<<<<<<< HEAD
 	
+=======
+
+>>>>>>> d8bbbe2a70f47a2cd284444c7c94936361e66b45
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {

@@ -1,5 +1,6 @@
 package edu.fisa.lab.service;
 
+import java.sql.SQLException;
 import java.util.*;
 
 import org.modelmapper.ModelMapper;
@@ -9,8 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.fisa.lab.DAO.BoardDAO;
 import edu.fisa.lab.DAO.StudentDAO;
+import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Board;
 import edu.fisa.lab.domain.entity.Student;
+import edu.fisa.lab.exception.NotExistException;
 import edu.fisa.lab.resDto.StudentResDto;
 
 
@@ -25,6 +28,10 @@ public class MainService {
 	@Autowired
 	BoardDAO boardDAO;
 	
+<<<<<<< HEAD
+=======
+	private ModelMapper mapper = new ModelMapper();
+>>>>>>> d8bbbe2a70f47a2cd284444c7c94936361e66b45
 	
 	public String myNameAndManitto(String name) {
 		Student me = studentDAO.findByName(name);
@@ -43,8 +50,7 @@ public class MainService {
 		return id;
 	}
 	
-	
-	public List<Board> findAll() {
+	public List<Board> boardFindAll() {
 		return boardDAO.findAll();
 	}
 	
