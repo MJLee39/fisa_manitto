@@ -58,32 +58,72 @@ button {
 	    	<input type="text" id="Id" name="Id" value="${id }" disabled>
 		</c:if><br>
 	
-		<br> <label for="newPassword">새로운 비밀번호:</label>
-		<input type="password" id="newPassword" name="newPassword"><br>
+		<label for="password">비밀번호:</label>
+		
+		<c:if test="${not empty pw}">
+	    	<input type="text" id="pw" name="pw" value='${pw}' disabled>
+		</c:if><br>
+		
+		
 		<br>
+		<label for="newPassword">새로운 비밀번호:</label>
+		<input type="password" id="newPassword" name="newPassword"><br>
+		
+		<br>
+		
 		<button type="button" onclick="changePassword()">비밀번호 변경</button>
 	</form>
 
 	<button onclick="logout()">로그아웃</button>
 	
 	<script>
+	
+		
+		// 아이디와 비밀번호를 가져오는 함수 (예시용으로 사용)
+		function getUserInfo() {
+			// 여기에 실제 아이디와 비밀번호를 가져오는 로직을 구현해야 합니다.
+			return {
+				userId : document.getElementById('Id').value,
+				password : document.getElementById('pw').value
+			};
+		}
 		
 		// 비밀번호 변경 함수
 		function changePassword() {
 			const userInfo = getUserInfo();
-			const currentPassword = document.getElementById('password').value;
+			const currentPassword = document.getElementById('pw').value;
 			const newPassword = document.getElementById('newPassword').value;
-
-			// 실제로는 서버로 비밀번호 변경 요청을 보내는 로직을 구현해야 합니다.
-			// 여기서는 간단하게 비밀번호가 맞으면 변경한다고 가정하겠습니다.
+			console.log("currentPassword:"+currentPassword);
+			console.log("newPassword:"+newPassword);
+			console.log("userInfo:"+userInfo);
+			console.log("userInfo.password:"+userInfo.password);
 			if (userInfo.password === currentPassword) {
-				// 비밀번호 변경 로직
-				alert('비밀번호가 변경되었습니다.');
+				const xhr = new XMLHttpRequest();
+				
+				xhr.open('POST', 'changePw', true);
+				xhr.setRequestHeader('Content-Type', 'application/json');
+				
+				xhr.onreadystatechange = function () {
+				    if (xhr.readyState === 4 && xhr.status === 200) {
+				      const response = JSON.parse(xhr.responseText);
+				      //console.log(this.responseText);
+				      if (response.success) {
+				        alert('비밀번호가 변경되었습니다.');
+				      } else {
+				        alert('비밀번호 변경에 실패했습니다.');
+				      }
+				    }
+			  	};
+			  const data = {
+			    currentPassword: currentPassword,
+			    newPassword: newPassword
+			  };
+			  xhr.send(JSON.stringify(data));
+			 
 			} else {
-				alert('비밀번호가 일치하지 않습니다.');
+				alert("비밀번호가 일치하지 않습니다.");
 			}
 		}
-
 		// 로그아웃 함수
 		function logout() {
 			// 실제로는 서버와의 세션 등을 해제하는 로직을 구현해야 합니다.

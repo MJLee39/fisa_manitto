@@ -52,10 +52,27 @@ h2 {
 body {
 	filter: none; /* 흐림 효과 제거 */
 }
+.button {
+  display: inline-block;
+  padding: 5px 10px;
+  font-size: 16px;
+  text-align: center;
+  text-decoration: none;
+  background-color: #3498DB;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.button:hover {
+	background-color: #45A049; /* 호버 시 버튼 배경색 변경 */
+}
 </style>
 </head>
 
 <body>
+	
 	<h2>마니또</h2>
 	<div class="img-container">
 		<img alt="" src="images/giftbox_close.png" width="200" height="200">
@@ -71,7 +88,7 @@ body {
 
 	<div>
 		<button id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
-		<button onclick="goToPage('myPage')">마이페이지</button>
+		<button class="button" onclick="goToPage('myPage')">마이페이지</button>
 	</div>
 
 	<script>

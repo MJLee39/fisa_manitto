@@ -91,8 +91,4 @@ button {
 		}
 	</script>
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
->>>>>>> d8bbbe2a70f47a2cd284444c7c94936361e66b45

@@ -11,6 +11,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import edu.fisa.lab.domain.entity.Student;
+import jakarta.transaction.Transactional;
 
 @Repository
 public interface StudentDAO extends JpaRepository<Student, Integer>{
@@ -30,7 +31,13 @@ public interface StudentDAO extends JpaRepository<Student, Integer>{
 	 List<Student> findAll();
 	 
 	 @Modifying
+	 @Transactional
 	 @Query("UPDATE Student s SET s.targetId = :targetId WHERE s.id = :id")
 	 void updateTargetIdById(@Param("targetId") long targetId, @Param("id") long id);
+	 
+	 @Modifying
+	 @Transactional
+	 @Query("UPDATE Student s SET s.pw = :pw WHERE s.id = :id")
+	 int changePassword(@Param("id") long id, @Param("pw") String pw);
 }
        
