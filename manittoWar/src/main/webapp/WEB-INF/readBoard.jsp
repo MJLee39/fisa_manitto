@@ -63,7 +63,6 @@ button {
 	        <tbody id="boardTableBody">
 	            <c:forEach var="board" items="${readBoard}">
 	                <tr>
-	                   
 	                    <td>${board.title}</td>
 	                    <td>${board.content}</td>
 	                </tr>

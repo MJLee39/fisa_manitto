@@ -76,8 +76,8 @@ button {
 	<script>
 	function submitPost() {
 		console.log('submitPost()');
-		alert(content.value);
-		alert(content.firstChild.nodeValue);
+		//alert(content.value);
+		//alert(content.firstChild.nodeValue);
         const title = document.getElementById('title').value;
         const content = document.getElementById('content').value;
 

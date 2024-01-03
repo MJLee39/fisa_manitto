@@ -56,7 +56,6 @@ public class Controller {
 	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
 	public String readBoard(Model model) {
 		List<Board> readBoardList = service.boardFindAll();
-		//System.out.println("*****"+readBoardList.get(0).getContent());
 		if(readBoardList != null) {
 			model.addAttribute("readBoard", readBoardList);
 			return "/readBoard";
