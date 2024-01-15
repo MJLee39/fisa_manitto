@@ -14,117 +14,119 @@ import edu.fisa.lab.domain.entity.Board;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.resDto.StudentResDto;
 
-
-
 @Service
 @Transactional
 public class MainService {
 
 	@Autowired
 	StudentDAO studentDAO;
-	
+
 	@Autowired
 	BoardDAO boardDAO;
-	
 
-	public void saveBoard(BoardDTO insertBoard) {
-	    Board board = insertBoard.toEntity();
-	    boardDAO.save(board);
-	}
-	
-	public Optional<Student> myNameAndManitto(String name) {
+	public String myNameAndManitto(String name) {
 		Student me = studentDAO.findByName(name);
-		Long targetId = me.getTargetId();
-		Optional<Student> targetName = studentDAO.findById(targetId);
+		long targetId = me.getTargetId();
+		String targetName = studentDAO.findById(targetId);
 		return targetName;
 	}
-	
-	public boolean isValidUser(String name, String userPw) {
-		Student student = studentDAO.findByName(name);
-		System.out.println(student);
-	    return student != null && student.getPw().equals(userPw);
+
+	public boolean isValidUser(String userId, String userPw) {
+		Student student = studentDAO.findByName(userId);
+		return student != null && student.getPw().equals(userPw);
 	}
-	
-	public Long findId(String name) {
-		Student student = studentDAO.findByName(name);
-		Long id = student.getId();
+
+	public long findId(String userId) {
+		long id = studentDAO.findIdByName(userId);
 		return id;
 	}
-	
-	
+
 	public List<Board> findAll() {
 		return boardDAO.findAll();
 	}
-	
+
 	public List<Board> boardFindAll() {
 		return boardDAO.findAll();
 	}
-	
 
 	public void saveBoard(BoardDTO insertBoard) {
-	    Board board = insertBoard.toEntity();
-	    boardDAO.save(board);
+		Board board = insertBoard.toEntity();
+		boardDAO.save(board);
 	}
-	
-	public List<Student> findAllStudent(){
+
+	public List<Student> findAllStudent() {
 		return studentDAO.findAll();
 	}
-	
-	public List<String[]> readManitto(List<Student> studentList){
-		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
-		for(int i=0; i<studentList.size(); i++) {
-			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTargetId()).get().getName()};
+
+	public List<String[]> readManitto(List<Student> studentList) {
+		List<String[]> ans = new ArrayList<>(); // 내 이름, target 이름 담긴 list
+		for (int i = 0; i < studentList.size(); i++) {
+			String[] str = { studentList.get(i).getName(), studentDAO.findById(studentList.get(i).getTargetId()) };
 			ans.add(str);
 		}
 		return ans;
 	}
-	
-	//마니또 만들기
-	public List<String[]> createManitto(List<Student> beforeStudent){
-		List<Student> after = beforeStudent;  
-		List<Long> idList = new ArrayList<>();  //id의 list
-		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
+
+	public List<String[]> createManitto(List<Student> beforeStudent) {
+		deleteAdmin(beforeStudent);
+
+		for (int i = 0; i < beforeStudent.size(); i++) {
+			System.out.print(beforeStudent.get(i).getId() + "/ ");
+			System.out.print(beforeStudent.get(i).getName() + "/ ");
+			System.out.print(beforeStudent.get(i).getPw() + "/ ");
+			System.out.println(beforeStudent.get(i).getTargetId());
+		}
+		// beforeStudent에서 admin 제거 확인
+		List<Student> after = beforeStudent;
+		List<Long> idList = new ArrayList<>(); // id의 list
+		List<String[]> ans = new ArrayList<>(); // 내 이름, target 이름 담긴 list
 		
-		for(int i=0; i<beforeStudent.size(); i++) {
+		for (int i = 0; i < beforeStudent.size(); i++) {
 			idList.add(beforeStudent.get(i).getId());
 		}
-		
+
 		boolean flag = true;
-		
-		while(flag) {
+
+		while (flag) {
 			Collections.shuffle(idList);
-			for(int i=0; i<beforeStudent.size(); i++) {
-				if(idList.get(i) != after.get(i).getId()) {
+			for (int i = 0; i < beforeStudent.size(); i++) {
+				if (idList.get(i) != after.get(i).getId()) {
 					after.get(i).setTargetId(idList.get(i));
 					after.set(i, after.get(i));
-				}else {
+				} else {
 					break;
 				}
-				if(i == beforeStudent.size()-1) {
+				if (i == beforeStudent.size() - 1) {
 					flag = false;
 				}
 			}
 		}
-	
-		for(int i=0; i<after.size(); i++) {
-			String[] str = {after.get(i).getName(),studentDAO.findNameById(after.get(i).getTargetId())};
+
+		for (int i = 0; i < after.size(); i++) {
+			String[] str = { after.get(i).getName(), studentDAO.findById(after.get(i).getTargetId()) };
 			ans.add(str);
 			Student student = after.get(i);
-		    studentDAO.updateTargetIdById(student.getTargetId(), student.getId());
+			studentDAO.updateTargetIdById(student.getTargetId(), student.getId());
 		}
 		return ans;
 	}
-	
-	
-	public void changePassword(String name, String newPw) {
-		System.out.println("name: "+name);
+
+	public void deleteAdmin (List<Student> beforeStudent) {
+		for (int i = 0; i < beforeStudent.size(); i++) {
+			if (beforeStudent.get(i).getId() == 0L) {
+				beforeStudent.remove(i);
+				System.out.println("** delete admin");
+				return;
+			}
+		}
+	}
+
+	public void changePassword(long id, String newPw) {
 		try {
-			Student s = studentDAO.findByName(name);
-			s.setPw(newPw);
+			studentDAO.changePassword(id, newPw);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	
+
 	}
 }
-
