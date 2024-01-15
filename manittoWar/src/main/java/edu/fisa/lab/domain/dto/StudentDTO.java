@@ -23,7 +23,7 @@ public class StudentDTO {
 	private Integer id;
 	private String name;
 	private String pw;
-	private long targetId;
+	private Long targetId;
 	
 	public Student toEntity() {
 		return Student.builder().id(id).name(name).pw(pw).targetId(targetId).build();

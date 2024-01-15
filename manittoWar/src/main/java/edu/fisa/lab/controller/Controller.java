@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
 import edu.fisa.lab.domain.entity.Board;
+import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.service.MainService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
@@ -31,9 +32,16 @@ public class Controller {
 			session.setAttribute("name", userId);
 			session.setAttribute("id", service.findId(userId));
 			session.setAttribute("pw", userPw);
-			return "redirect:/main.jsp"; 
+			
+			System.out.println("** id: " + session.getAttribute("id"));
+			
+			if ((long) session.getAttribute("id") == 0L) {
+				return "redirect:/admin.jsp";
+			} else {
+				return "redirect:/main.jsp";
+			}
 		}else {	
-			model.addAttribute("loginError", true); // 에러 여부를 모델에 추가
+			model.addAttribute("loginError", true);
 			return "redirect:/login.html"; 
 		}
 		
@@ -47,9 +55,6 @@ public class Controller {
 		model.addAttribute("pw",myPw);
 		return "/myPage";
 	}
-	
-	
-	
 	
 	@RequestMapping(path = "/myManitto", method = RequestMethod.GET)
 	public String myManitto(HttpSession session, Model model) {
@@ -85,7 +90,6 @@ public class Controller {
 		}
 	}
 	
-
 	@PostMapping("/changePw")
 	public void changePassword(HttpSession session, @RequestBody String newPw) {
 		long id = (long) session.getAttribute("id");
@@ -94,7 +98,6 @@ public class Controller {
 		service.changePassword(id, newPw);
 		return;
 	}
-
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {
