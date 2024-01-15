@@ -6,10 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-<<<<<<< HEAD:manittoWar2/src/main/java/edu/fisa/lab/controller/RestController.java
-=======
 
->>>>>>> 242158e627bb7f992fab7369cca4e7cf095de161:manittoWar/src/main/java/edu/fisa/lab/controller/RestController.java
 import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.service.MainService;
@@ -21,12 +18,6 @@ public class RestController {
 	
 	@Autowired
 	MainService service;
-	
-
-	@PostMapping("/writeBoard")
-	public void writeBoard(BoardDTO insertBoard) throws Exception{
-		service.saveBoard(insertBoard);
-	}
 
 	
 	@PostMapping("/writeBoard")
