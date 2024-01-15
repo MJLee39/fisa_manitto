@@ -14,30 +14,37 @@ import edu.fisa.lab.domain.entity.Student;
 import jakarta.transaction.Transactional;
 
 @Repository
-public interface StudentDAO extends JpaRepository<Student, Integer>{
+public interface StudentDAO extends JpaRepository<Student, Long>{
 		
-	Student findStudentByTargetId(long targetId);
+	 //select name from student where id=?
+	 String findNameById(@Param("id") Long id);
 	
-	 @Query("SELECT s FROM Student s WHERE s.name = :name")
+	 //select * from student where targetId=?
+	 Student findByTargetId(Long targetId);
+
+	 //SELECT * FROM Student WHERE name=?
 	 Student findByName(@Param("name") String name);
 	 
-	 @Query("SELECT id FROM Student s WHERE s.name = :name")
-	 long findIdByName(@Param("name") String name);
+	 // 두 메소드 모두 동일한 쿼리를 생성함
+	 //Student findStudentById(Long id);
 	 
-	 @Query("SELECT name FROM Student s WHERE s.id = :id")
-	 String findById(@Param("id") long id);
+	 // by Song
+	 Optional<Student> findById(@Param("id") Long id);
 	 
-	 @Query(value = "SELECT * FROM student", nativeQuery = true)
+	//SELECT * FROM Student
 	 List<Student> findAll();
 	 
 	 @Modifying
 	 @Transactional
 	 @Query("UPDATE Student s SET s.targetId = :targetId WHERE s.id = :id")
-	 void updateTargetIdById(@Param("targetId") long targetId, @Param("id") long id);
+	 void updateTargetIdById(@Param("targetId") Long targetId, @Param("id") Long id);
 	 
 	 @Modifying
 	 @Transactional
 	 @Query("UPDATE Student s SET s.pw = :pw WHERE s.id = :id")
-	 int changePassword(@Param("id") long id, @Param("pw") String pw);
+	 int changePassword(@Param("id") Long id, @Param("pw") String pw);
+	 
+	
+	 
 }
        

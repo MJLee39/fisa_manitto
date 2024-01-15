@@ -10,6 +10,5 @@ import edu.fisa.lab.domain.entity.Board;
 
 public interface BoardDAO extends JpaRepository<Board, Long>{
 
-	@Query("SELECT b FROM Board b")
 	List<Board> findAll();
 }

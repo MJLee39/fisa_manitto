@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.service.MainService;
 import jakarta.servlet.http.HttpSession;
@@ -17,6 +18,12 @@ public class RestController {
 	
 	@Autowired
 	MainService service;
+	
+
+	@PostMapping("/writeBoard")
+	public void writeBoard(BoardDTO insertBoard) throws Exception{
+		service.saveBoard(insertBoard);
+	}
 
 	@PostMapping("/createManittoEndpoint")
 	public List<String[]> selectAll (){

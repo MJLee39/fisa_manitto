@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import edu.fisa.lab.DAO.BoardDAO;
 import edu.fisa.lab.DAO.StudentDAO;
+import edu.fisa.lab.domain.dto.BoardDTO;
 import edu.fisa.lab.domain.entity.Board;
 import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.resDto.StudentResDto;
@@ -25,21 +26,28 @@ public class MainService {
 	@Autowired
 	BoardDAO boardDAO;
 	
+
+	public void saveBoard(BoardDTO insertBoard) {
+	    Board board = insertBoard.toEntity();
+	    boardDAO.save(board);
+	}
 	
-	public String myNameAndManitto(String name) {
+	public Optional<Student> myNameAndManitto(String name) {
 		Student me = studentDAO.findByName(name);
-		long targetId = me.getTargetId();
-		String targetName = studentDAO.findById(targetId);
+		Long targetId = me.getTargetId();
+		Optional<Student> targetName = studentDAO.findById(targetId);
 		return targetName;
 	}
 	
-	public boolean isValidUser(String userId, String userPw) {
-		Student student = studentDAO.findByName(userId);
+	public boolean isValidUser(String name, String userPw) {
+		Student student = studentDAO.findByName(name);
+		System.out.println(student);
 	    return student != null && student.getPw().equals(userPw);
 	}
 	
-	public long findId(String userId) {
-		long id = studentDAO.findIdByName(userId);
+	public Long findId(String name) {
+		Student student = studentDAO.findByName(name);
+		Long id = student.getId();
 		return id;
 	}
 	
@@ -59,12 +67,13 @@ public class MainService {
 	public List<String[]> readManitto(List<Student> studentList){
 		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
 		for(int i=0; i<studentList.size(); i++) {
-			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTargetId())};
+			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTargetId()).get().getName()};
 			ans.add(str);
 		}
 		return ans;
 	}
 	
+	//마니또 만들기
 	public List<String[]> createManitto(List<Student> beforeStudent){
 		List<Student> after = beforeStudent;  
 		List<Long> idList = new ArrayList<>();  //id의 list
@@ -92,7 +101,7 @@ public class MainService {
 		}
 	
 		for(int i=0; i<after.size(); i++) {
-			String[] str = {after.get(i).getName(),studentDAO.findById(after.get(i).getTargetId())};
+			String[] str = {after.get(i).getName(),studentDAO.findNameById(after.get(i).getTargetId())};
 			ans.add(str);
 			Student student = after.get(i);
 		    studentDAO.updateTargetIdById(student.getTargetId(), student.getId());
@@ -100,9 +109,12 @@ public class MainService {
 		return ans;
 	}
 	
-	public void changePassword(long id, String newPw) {
+	
+	public void changePassword(String name, String newPw) {
+		System.out.println("name: "+name);
 		try {
-			studentDAO.changePassword(id, newPw);
+			Student s = studentDAO.findByName(name);
+			s.setPw(newPw);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

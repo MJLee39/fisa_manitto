@@ -53,7 +53,7 @@ button {
 	<h2>마이페이지</h2>
 
 	<form id="userInfoForm">
-		<label for="Id">아이디:</label> 
+		<label for="Id">이름:</label> 
 		<c:if test="${not empty id}">
 	    	<input type="text" id="Id" name="Id" value="${id }" disabled>
 		</c:if><br>
@@ -61,7 +61,7 @@ button {
 		<label for="password">비밀번호:</label>
 		
 		<c:if test="${not empty pw}">
-	    	<input type="text" id="pw" name="pw" value='${pw}' disabled>
+	    	<input type="text" id="pw" name="pw">
 		</c:if><br>
 		
 		
@@ -77,8 +77,6 @@ button {
 	<button onclick="logout()">로그아웃</button>
 	
 	<script>
-	
-		
 		// 아이디와 비밀번호를 가져오는 함수 (예시용으로 사용)
 		function getUserInfo() {
 			// 여기에 실제 아이디와 비밀번호를 가져오는 로직을 구현해야 합니다.
@@ -90,40 +88,39 @@ button {
 		
 		// 비밀번호 변경 함수
 		function changePassword() {
-			const userInfo = getUserInfo();
-			const currentPassword = document.getElementById('pw').value;
-			const newPassword = document.getElementById('newPassword').value;
-			console.log("currentPassword:"+currentPassword);
-			console.log("newPassword:"+newPassword);
-			console.log("userInfo:"+userInfo);
-			console.log("userInfo.password:"+userInfo.password);
-			if (userInfo.password === currentPassword) {
-				const xhr = new XMLHttpRequest();
-				
-				xhr.open('POST', 'changePw', true);
-				xhr.setRequestHeader('Content-Type', 'application/json');
-				
-				xhr.onreadystatechange = function () {
-				    if (xhr.readyState === 4 && xhr.status === 200) {
-				      const response = JSON.parse(xhr.responseText);
-				      //console.log(this.responseText);
-				      if (response.success) {
-				        alert('비밀번호가 변경되었습니다.');
-				      } else {
-				        alert('비밀번호 변경에 실패했습니다.');
-				      }
-				    }
-			  	};
-			  const data = {
-			    currentPassword: currentPassword,
-			    newPassword: newPassword
-			  };
-			  xhr.send(JSON.stringify(data));
-			 
-			} else {
-				alert("비밀번호가 일치하지 않습니다.");
-			}
+		    const userInfo = getUserInfo();
+		    const id = document.getElementById('Id').value;
+		    const currentPassword = document.getElementById('pw').value;
+		    const newPassword = document.getElementById('newPassword').value;
+		
+		    if (userInfo.password === currentPassword) {
+		        const xhr = new XMLHttpRequest();
+		        xhr.open('POST', 'changePw', true);
+		        xhr.setRequestHeader('Content-Type', 'application/json');
+		        xhr.onreadystatechange = function () {
+		            if (xhr.readyState === 4 && xhr.status === 200) {
+		                const response = JSON.parse(xhr.responseText);
+		                alert(this.responseText);
+		                alert(response.responseText);
+		                consol.log("되는가?");
+		                if (response.success) {
+		                    alert('비밀번호가 변경되었습니다.');
+		                } else {
+		                    alert('비밀번호 변경에 실패했습니다.');
+		                }
+		            }
+		        };
+		        const data = {
+		            id: id,
+		            newPassword: newPassword
+		        };
+		        xhr.send(JSON.stringify(data));
+		    } else {
+		        alert("비밀번호가 일치하지 않습니다.");
+		    }
 		}
+
+		
 		// 로그아웃 함수
 		function logout() {
 			// 실제로는 서버와의 세션 등을 해제하는 로직을 구현해야 합니다.

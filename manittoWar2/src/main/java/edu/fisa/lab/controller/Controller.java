@@ -1,6 +1,8 @@
 package edu.fisa.lab.controller;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -8,10 +10,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
 import edu.fisa.lab.domain.entity.Board;
+import edu.fisa.lab.domain.entity.Student;
 import edu.fisa.lab.service.MainService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
@@ -23,12 +27,13 @@ public class Controller {
 	MainService service;
 	
 	@RequestMapping(path = "/login", method = RequestMethod.POST)
-	public String loginCheck(String userId, String userPw, HttpSession session, Model model) throws Exception {
-		boolean isValid = service.isValidUser(userId, userPw);
-	
+	public String loginCheck(String name, String userPw, HttpSession session, Model model) throws Exception {
+		boolean isValid = service.isValidUser(name, userPw);
+		System.out.println(isValid);
+		System.out.println(service.findId(name).getClass().getName());
 		if(isValid) {
-			session.setAttribute("name", userId);
-			session.setAttribute("id", service.findId(userId));
+			session.setAttribute("name", name);
+			session.setAttribute("id", service.findId(name));
 			session.setAttribute("pw", userPw);
 			return "redirect:/main.jsp"; 
 		}else {	
@@ -52,10 +57,11 @@ public class Controller {
 	
 	@RequestMapping(path = "/myManitto", method = RequestMethod.GET)
 	public String myManitto(HttpSession session, Model model) {
-		long id = (long) session.getAttribute("id");
+		Long id = (Long) session.getAttribute("id");
 		String name = (String) session.getAttribute("name");  //내 이름
 		
-		String myManittoName = service.myNameAndManitto(name);  //내 마니또 이름
+		Optional<Student> myManitto = service.myNameAndManitto(name);  //내 마니또 이름
+		String myManittoName = myManitto.get().getName();
 		System.out.println("myManittoName: "+myManittoName);
 		if(myManittoName != null) {
 			model.addAttribute("manitto", myManittoName);
@@ -85,12 +91,9 @@ public class Controller {
 	}
 	
 	@PostMapping("/changePw")
-	public void changePassword(HttpSession session, @RequestBody String newPw) {
-		long id = (long) session.getAttribute("id");
-		System.out.println("id: "+id);
-		
-		service.changePassword(id, newPw);
-		return;
+	public String changePassword(@RequestBody Map<String, String> requestData) {
+		service.changePassword(requestData.get("id"), requestData.get("newPassword"));
+		return "성공";
 	}
 	
 	@ExceptionHandler
