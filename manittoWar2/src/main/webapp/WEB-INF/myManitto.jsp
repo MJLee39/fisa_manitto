@@ -50,7 +50,7 @@ img {
 </head>
 <body>
 	<div class="img-container">
-		<img alt="" src="images/giftbox_open.png" width="200" height="200">
+		<img alt="" src="images/giftbox_open.gif" width="200" height="200">
 	</div>
 
 	<h2>나의 마니또</h2>

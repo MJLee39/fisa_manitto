@@ -1,3 +1,9 @@
+<<<<<<< HEAD:manittoWar2/src/main/webapp/readBoard.html
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+>>>>>>> 242158e627bb7f992fab7369cca4e7cf095de161:manittoWar/src/main/webapp/WEB-INF/readBoard.jsp
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +40,7 @@ th {
 	background-color: #f2f2f2;
 }
 
-button {
+.myPageButton {
 	padding: 10px 20px;
 	background-color: #3498db;
 	color: white;
@@ -45,9 +51,22 @@ button {
 	top: 20px;
 	right: 20px;
 }
+
+.homeButton {
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
 </style>
 </head>
 <body>
+<<<<<<< HEAD:manittoWar2/src/main/webapp/readBoard.html
 	<h2>게시판 조회</h2>
 
 	<table>
@@ -62,10 +81,38 @@ button {
 			<!-- 여기에 게시글이 동적으로 추가됩니다 -->
 		</tbody>
 	</table>
+=======
+	<h2>마니또에게 보내는 편지</h2>
+	<c:if test="${not empty readBoard}">
+	    <table>
+	        <thead>
+	            <tr>
+	                <th>제목</th>
+	                <th>내용</th>
+	            </tr>
+	        </thead>
+	        <tbody id="boardTableBody">
+	            <c:forEach var="board" items="${readBoard}">
+	                <tr>
+	                    <td>${board.title}</td>
+	                    <td>${board.content}</td>
+	                </tr>
+	            </c:forEach>
+	        </tbody>
+	    </table>
+	</c:if>
+	<c:if test="${empty readBoard}">
+	    <div class="message">
+	        <p>게시글이 없습니다.</p>
+	    </div>
+	</c:if>
+>>>>>>> 242158e627bb7f992fab7369cca4e7cf095de161:manittoWar/src/main/webapp/WEB-INF/readBoard.jsp
 
-	<button onclick="goToMyPage()">마이페이지</button>
+	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
+	<button class="homeButton" onclick="goToHome()">홈</button>
 
 	<script>
+<<<<<<< HEAD:manittoWar2/src/main/webapp/readBoard.html
     // 게시글 데이터
     const boardData = [
       { boardId: 1, title: '첫 번째 글', content: '첫 번째 글의 내용' },
@@ -87,6 +134,14 @@ button {
       boardTableBody.innerHTML += row;
     });
 
+=======
+
+	 // 홈으로 이동하는 함수
+    function goToHome() {
+      window.location.href = 'main.jsp';
+    }
+	
+>>>>>>> 242158e627bb7f992fab7369cca4e7cf095de161:manittoWar/src/main/webapp/WEB-INF/readBoard.jsp
     // 마이페이지로 이동하는 함수
     function goToMyPage() {
       window.location.href = '/myPage.html';

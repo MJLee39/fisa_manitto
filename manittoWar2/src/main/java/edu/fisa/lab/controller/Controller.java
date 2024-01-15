@@ -90,11 +90,13 @@ public class Controller {
 		}
 	}
 	
+
 	@PostMapping("/changePw")
 	public String changePassword(@RequestBody Map<String, String> requestData) {
 		service.changePassword(requestData.get("id"), requestData.get("newPassword"));
 		return "성공";
 	}
+
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {
