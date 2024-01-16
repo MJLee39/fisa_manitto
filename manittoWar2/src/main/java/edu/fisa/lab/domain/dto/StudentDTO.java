@@ -23,14 +23,14 @@ public class StudentDTO {
 	private Long id;
 	private String name;
 	private String pw;
-	private Long targetId;
+	private Long target;
 	
 	public Student toEntity() {
-		return Student.builder().id(id).name(name).pw(pw).targetId(targetId).build();
+		return Student.builder().id(id).name(name).pw(pw).target(target).build();
 	}
 	
 	public static StudentDTO toDTOFromEntity(Student student) {
-		return StudentDTO.builder().id(student.getId()).name(student.getName()).targetId(student.getTargetId()).build();
+		return StudentDTO.builder().id(student.getId()).name(student.getName()).target(student.getTarget()).build();
 	}
 
 }

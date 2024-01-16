@@ -37,8 +37,7 @@ h2 {
 
 /* 새로운 CSS */
 #hideButton {
-	justify-content: center;
-
+	margin-top: 20px;
 	padding: 10px 20px;
 	background-color: #3498db;
 	color: white;
@@ -54,7 +53,6 @@ body {
 	filter: none; /* 흐림 효과 제거 */
 }
 .button {
-justify-content: center;
   display: inline-block;
   padding: 5px 10px;
   font-size: 16px;
@@ -77,18 +75,18 @@ justify-content: center;
 	
 	<h2>마니또</h2>
 	<div class="img-container">
-		<img alt="" src="images/giftbox_close.gif" width="200" height="200">
+		<img alt="" src="images/giftbox_close.png" width="200" height="200">
 	</div>
 
 	<div class="button-container">
 		<button class="button" onclick="goToPage('myManitto')">내 마니또
 			확인하기</button>
-		<button class="button" onclick="goToPage('writeBoard.html')">편지 
+		<button class="button" onclick="goToPage('writeBoard.html')">편지
 			게시하기</button>
 		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>
 
-	<div class="button-container">
+	<div>
 		<button id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
 		<button class="button" onclick="goToPage('myPage')">마이페이지</button>
 	</div>

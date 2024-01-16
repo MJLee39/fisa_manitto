@@ -34,7 +34,7 @@ public class MainService {
 	
 	public Optional<Student> myNameAndManitto(String name) {
 		Student me = studentDAO.findByName(name);
-		Long targetId = me.getTargetId();
+		Long targetId = me.getTarget();
 		Optional<Student> targetName = studentDAO.findById(targetId);
 		return targetName;
 	}
@@ -51,19 +51,9 @@ public class MainService {
 		return id;
 	}
 	
-	
-	public List<Board> findAll() {
-		return boardDAO.findAll();
-	}
-	
 	public List<Board> boardFindAll() {
+		System.out.println("controller: "+boardDAO.findAll());
 		return boardDAO.findAll();
-	}
-	
-
-	public void saveBoard(BoardDTO insertBoard) {
-	    Board board = insertBoard.toEntity();
-	    boardDAO.save(board);
 	}
 	
 	public List<Student> findAllStudent(){
@@ -73,7 +63,7 @@ public class MainService {
 	public List<String[]> readManitto(List<Student> studentList){
 		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
 		for(int i=0; i<studentList.size(); i++) {
-			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTargetId()).get().getName()};
+			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTarget()).get().getName()};
 			ans.add(str);
 		}
 		return ans;
@@ -84,7 +74,6 @@ public class MainService {
 		List<Student> after = beforeStudent;  
 		List<Long> idList = new ArrayList<>();  //id의 list
 		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
-		
 		for(int i=0; i<beforeStudent.size(); i++) {
 			idList.add(beforeStudent.get(i).getId());
 		}
@@ -95,7 +84,7 @@ public class MainService {
 			Collections.shuffle(idList);
 			for(int i=0; i<beforeStudent.size(); i++) {
 				if(idList.get(i) != after.get(i).getId()) {
-					after.get(i).setTargetId(idList.get(i));
+					after.get(i).setTarget(idList.get(i));
 					after.set(i, after.get(i));
 				}else {
 					break;
@@ -107,10 +96,10 @@ public class MainService {
 		}
 	
 		for(int i=0; i<after.size(); i++) {
-			String[] str = {after.get(i).getName(),studentDAO.findNameById(after.get(i).getTargetId())};
+			String[] str = {after.get(i).getName(),studentDAO.findById(after.get(i).getTarget()).get().getName()};
 			ans.add(str);
 			Student student = after.get(i);
-		    studentDAO.updateTargetIdById(student.getTargetId(), student.getId());
+		    studentDAO.updateTargetIdById(student.getTarget(), student.getId());
 		}
 		return ans;
 	}

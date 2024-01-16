@@ -47,11 +47,22 @@ button {
 	border-radius: 5px;
 	cursor: pointer;
 }
+.homeButton {
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
 </style>
 </head>
 <body>
 	<h2>마이페이지</h2>
-
+	<button class="homeButton" onclick="goToHome()">홈</button>
 	<form id="userInfoForm">
 		<label for="Id">이름:</label> 
 		<c:if test="${not empty id}">
@@ -86,47 +97,58 @@ button {
 			};
 		}
 		
+		const pwValue = '${pw}'
+
 		// 비밀번호 변경 함수
 		function changePassword() {
 		    const userInfo = getUserInfo();
 		    const id = document.getElementById('Id').value;
 		    const currentPassword = document.getElementById('pw').value;
 		    const newPassword = document.getElementById('newPassword').value;
-		
-		    if (userInfo.password === currentPassword) {
+		    if (pwValue == currentPassword) {
 		        const xhr = new XMLHttpRequest();
 		        xhr.open('POST', 'changePw', true);
 		        xhr.setRequestHeader('Content-Type', 'application/json');
 		        xhr.onreadystatechange = function () {
 		            if (xhr.readyState === 4 && xhr.status === 200) {
-		                const response = JSON.parse(xhr.responseText);
-		                alert(this.responseText);
-		                alert(response.responseText);
-		                consol.log("되는가?");
+		            	const response = JSON.parse(xhr.responseText);
 		                if (response.success) {
 		                    alert('비밀번호가 변경되었습니다.');
+		                    window.location.href = 'myPage';
 		                } else {
 		                    alert('비밀번호 변경에 실패했습니다.');
 		                }
 		            }
 		        };
+		        
 		        const data = {
 		            id: id,
 		            newPassword: newPassword
 		        };
 		        xhr.send(JSON.stringify(data));
+		        
 		    } else {
 		        alert("비밀번호가 일치하지 않습니다.");
 		    }
 		}
 
-		
-		// 로그아웃 함수
+		//로그아웃
 		function logout() {
-			// 실제로는 서버와의 세션 등을 해제하는 로직을 구현해야 합니다.
-			alert('로그아웃되었습니다.');
+			const xhr = new XMLHttpRequest();
+			xhr.open('GET', 'logout', true);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4 && xhr.status === 200) {
+					alert('로그아웃되었습니다.');
+					window.location.href = 'login.html'; // 로그아웃 후에 login.html로 이동
+				}
+			};
+			xhr.send();
 		}
 
+		// 홈으로 이동하는 함수
+	    function goToHome() {
+	      window.location.href = 'main.jsp';
+	    }
 		
 	</script>
 </body>

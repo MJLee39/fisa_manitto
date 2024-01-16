@@ -20,7 +20,7 @@ public interface StudentDAO extends JpaRepository<Student, Long>{
 	 String findNameById(@Param("id") Long id);
 	
 	 //select * from student where targetId=?
-	 Student findByTargetId(Long targetId);
+	 Student findByTarget(Long target);
 
 	 //SELECT * FROM Student WHERE name=?
 	 Student findByName(@Param("name") String name);
@@ -29,15 +29,12 @@ public interface StudentDAO extends JpaRepository<Student, Long>{
 	 //Student findStudentById(Long id);
 	 
 	 // by Song
-	 Optional<Student> findById(@Param("id") Long id);
-	 
-	//SELECT * FROM Student
-	 List<Student> findAll();
+	 //Optional<Student> findById(@Param("id") Long id);	 
 	 
 	 @Modifying
 	 @Transactional
-	 @Query("UPDATE Student s SET s.targetId = :targetId WHERE s.id = :id")
-	 void updateTargetIdById(@Param("targetId") Long targetId, @Param("id") Long id);
+	 @Query("UPDATE Student s SET s.target = :target WHERE s.id = :id")
+	 void updateTargetIdById(@Param("target") Long target, @Param("id") Long id);
 	 
 	 @Modifying
 	 @Transactional

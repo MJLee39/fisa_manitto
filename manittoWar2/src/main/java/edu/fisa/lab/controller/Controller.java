@@ -1,5 +1,6 @@
 package edu.fisa.lab.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.ui.Model;
 
@@ -82,6 +84,7 @@ public class Controller {
 	@RequestMapping(path = "/readBoard", method = RequestMethod.GET)
 	public String readBoard(Model model) {
 		List<Board> readBoardList = service.boardFindAll();
+		System.out.println(readBoardList);
 		if(readBoardList != null) {
 			model.addAttribute("readBoard", readBoardList);
 			return "/readBoard";
@@ -90,13 +93,19 @@ public class Controller {
 		}
 	}
 	
-
 	@PostMapping("/changePw")
-	public String changePassword(@RequestBody Map<String, String> requestData) {
-		service.changePassword(requestData.get("id"), requestData.get("newPassword"));
-		return "성공";
+	@ResponseBody
+	public Map<String, Object> changePassword(@RequestBody Map<String, String> requestData) {
+		Map<String, Object> response = new HashMap<>();
+		try {
+            service.changePassword(requestData.get("id"), requestData.get("newPassword"));
+            response.put("success", true);
+        } catch (Exception e) {
+            response.put("success", false);
+            response.put("error", "비밀번호 변경에 실패했습니다.");
+        }
+        return response;
 	}
-
 	
 	@ExceptionHandler
 	public String exceptionHandler(Exception e, Model m) {

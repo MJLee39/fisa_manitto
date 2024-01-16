@@ -53,6 +53,17 @@ button {
 	border-radius: 5px;
 	cursor: pointer;
 }
+.homeButton {
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
 </style>
 </head>
 <body>
@@ -70,7 +81,7 @@ button {
 	</form>
 
 	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
-
+	<button class="homeButton" onclick="goToHome()">홈</button>
 	<script>
     
 	function submitPost() {
@@ -98,6 +109,12 @@ button {
 		function goToMyPage() {
 			window.location.href = 'myPage';
 		}
+		
+		// 홈으로 이동하는 함수
+	    function goToHome() {
+	      window.location.href = 'main.jsp';
+	    }
+		
 	</script>
 </body>
 </html>
