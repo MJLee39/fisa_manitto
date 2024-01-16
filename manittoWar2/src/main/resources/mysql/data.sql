@@ -1,10 +1,16 @@
 DROP TABLE student;
 
 CREATE TABLE student (
-    id int PRIMARY KEY,
+    id BigInt PRIMARY KEY,
     name VARCHAR(20) NOT NULL,
     pw VARCHAR(20) NOT NULL,
-    targetId int DEFAULT NULL
+    target_id BigInt DEFAULT NULL
+);
+
+CREATE TABLE board (
+	board BigInt AUTO_INCREMENT PRIMARY KEY,
+	title varchar(20) not null,
+	content varchar(2000) not null
 );
 
 insert into student(id, name, pw) values(0, 'admin', '0000');

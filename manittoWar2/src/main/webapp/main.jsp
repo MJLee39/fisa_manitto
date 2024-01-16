@@ -67,7 +67,7 @@ justify-content: center;
 }
 
 .button:hover {
-	background-color: #45A049; /* 호버 시 버튼 배경색 변경 */
+	background-color: #45A049;
 }
 </style>
 </head>

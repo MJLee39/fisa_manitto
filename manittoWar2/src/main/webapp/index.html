@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>메인 페이지</title>
+<style>
+.button-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-top: 20px;
+}
+
+.button {
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 200px;
+	height: 40px;
+	margin: 5px;
+}
+
+.img-container {
+	text-align: center;
+}
+
+h2 {
+	text-align: center;
+}
+
+#img_area {
+	margin: 0 auto;
+}
+
+#gift_box {
+	margin: 0 auto;
+	padding: 10px 20px;
+	width: 200px;
+	height: 200px;
+}
+
+#login_area {
+
+	margin: 0 auto;
+	padding: 10px 20px;
+	width: 400px;
+	height: 400px;
+}
+
+#hideButton {
+	margin-top: 20px;
+	padding: 10px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 200px;
+	height: 40px;
+}
+
+body {
+	filter: none;
+}
+</style>
+</head>
+
+<body>
+	<h2>우리 FISA 클라우드 엔지니어링 마니또 프로그램</h2>
+	<br>
+	<br>
+	
+	<div id="img_area" >
+		<img id="gift_box" src="images/giftbox_close.png">
+	</div>
+	<br>
+	<br>
+	
+	<div id="login_area">
+		<form action="login" method="post">
+		
+			<label for="id">ID : </label>
+			<input type="text" id="id" name="userId">
+			<br> 
+			<br>
+			<label for="password">pw : </label>
+			<input type="password" id="password" name="userPw"><br>
+			<br>
+			
+			<input type="submit" value="로그인">
+			
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마이페이지</title>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	background-color: #f4f4f4;
+	margin: 0;
+	padding: 0;
+}
+
+h2 {
+	margin-top: 20px;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
+}
+
+form label {
+	margin-bottom: 10px;
+	font-weight: bold;
+}
+
+form input[type="text"], form input[type="password"], form button {
+	padding: 8px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+button {
+	padding: 8px 20px;
+	background-color: #3498db;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+</style>
+</head>
+<body>
+	<h2>마이페이지</h2>
+
+	<form id="userInfoForm">
+		<label for="Id">아이디:</label> <input type="text" id="Id" name="Id" disabled><br> <br>
+		<label for="password">비밀번호:</label>
+		<input type="password" id="password" name="password"><br>
+		<br> <label for="newPassword">새로운 비밀번호:</label>
+		<input type="password" id="newPassword" name="newPassword"><br>
+		<br>
+		<button type="button" onclick="changePassword()">비밀번호 변경</button>
+	</form>
+
+	<button onclick="logout()">로그아웃</button>
+
+	<script>
+		function getUserInfo() {
+			return {
+				userId : '사용자아이디',
+				password : '현재비밀번호'
+			};
+		}
+
+		function changePassword() {
+			const userInfo = getUserInfo();
+			const currentPassword = document.getElementById('password').value;
+			const newPassword = document.getElementById('newPassword').value;
+
+			if (userInfo.password === currentPassword) {
+				alert('비밀번호가 변경되었습니다.');
+			} else {
+				alert('비밀번호가 일치하지 않습니다.');
+			}
+		}
+
+		function logout() {
+			alert('로그아웃되었습니다.');
+		}
+
+		window.onload = function() {
+			const userInfo = getUserInfo();
+			document.getElementById('userId').value = userInfo.userId;
+		};
+	</script>
+</body>
+</html>
