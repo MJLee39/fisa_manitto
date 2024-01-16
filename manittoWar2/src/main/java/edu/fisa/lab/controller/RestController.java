@@ -19,7 +19,6 @@ public class RestController {
 	@Autowired
 	MainService service;
 	
-
 	@PostMapping("/writeBoard")
 	public void writeBoard(BoardDTO insertBoard) throws Exception{
 		service.saveBoard(insertBoard);

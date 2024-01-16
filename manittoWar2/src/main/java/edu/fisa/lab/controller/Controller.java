@@ -37,7 +37,12 @@ public class Controller {
 			session.setAttribute("name", name);
 			session.setAttribute("id", service.findId(name));
 			session.setAttribute("pw", userPw);
-			return "redirect:/main.jsp"; 
+			if ((Long) session.getAttribute("id") == 0L) {
+				return "redirect:/admin.html";
+			} else {
+				return "redirect:/main.jsp";
+			}
+			
 		}else {	
 			model.addAttribute("loginError", true); // 에러 여부를 모델에 추가
 			return "redirect:/login.html"; 

@@ -60,7 +60,9 @@ public class MainService {
 		return studentDAO.findAll();
 	}
 	
+	
 	public List<String[]> readManitto(List<Student> studentList){
+		deleteAdmin(studentList);
 		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
 		for(int i=0; i<studentList.size(); i++) {
 			String[] str = {studentList.get(i).getName(),studentDAO.findById(studentList.get(i).getTarget()).get().getName()};
@@ -71,6 +73,7 @@ public class MainService {
 	
 	//마니또 만들기
 	public List<String[]> createManitto(List<Student> beforeStudent){
+		deleteAdmin(beforeStudent);
 		List<Student> after = beforeStudent;  
 		List<Long> idList = new ArrayList<>();  //id의 list
 		List<String[]> ans = new ArrayList<>();  //내 이름, target 이름 담긴 list
@@ -103,6 +106,17 @@ public class MainService {
 		}
 		return ans;
 	}
+	
+	public void deleteAdmin (List<Student> beforeStudent) {
+		for (int i = 0; i < beforeStudent.size(); i++) {
+			if (beforeStudent.get(i).getId() == 0L) {
+				beforeStudent.remove(i);
+				System.out.println("** delete admin");
+				return;
+			}
+		}
+	}
+
 	
 	
 	public void changePassword(String name, String newPw) {

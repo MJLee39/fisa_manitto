@@ -50,10 +50,24 @@ th {
 </style>
 </head>
 <body>
-	<button type="button" onclick="createManitto()">마니또 생성하기</button>
-	<div id="allView"></div>
+	
 
+	<h2>관리자 페이지</h2>
+	<div class="img-container">
+		<img alt="" src="images/giftbox_close.gif" width="200" height="200">
+	</div>
+	<div class="button-container">
+		<button type="button" onclick="createManitto()">마니또 생성하기</button>
+		<button class="button" onclick="goToPage('writeBoard.html')">편지
+			게시하기</button>
+		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
+	</div>
+	<div id="allView"></div>
 	<script>
+		function goToPage(url) {
+			window.location.href = url;
+		}
+		
 		function createManitto() {
 			 // 마니또 생성 로직 구현해야함
 			 var xhr = new XMLHttpRequest();

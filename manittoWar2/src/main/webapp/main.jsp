@@ -15,6 +15,7 @@
 	margin-top: 20px;
 }
 
+
 .button {
 	padding: 10px 20px;
 	background-color: #3498db;
@@ -84,10 +85,11 @@ body {
 		<button class="button" onclick="goToPage('writeBoard.html')">편지
 			게시하기</button>
 		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
+		
 	</div>
 
-	<div>
-		<button id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
+	<div class="button-container">
+		<button class="button" id="hideButton" onclick="goToPage('openManitto.html')" disabled>전체 확인</button>
 		<button class="button" onclick="goToPage('myPage')">마이페이지</button>
 	</div>
 

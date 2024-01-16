@@ -62,7 +62,7 @@ button {
 </head>
 <body>
 	<h2>마이페이지</h2>
-	<button class="homeButton" onclick="goToHome()">홈</button>
+	<!-- <button class="homeButton" onclick="goToHome()">홈</button> -->
 	<form id="userInfoForm">
 		<label for="Id">이름:</label> 
 		<c:if test="${not empty id}">
@@ -146,9 +146,9 @@ button {
 		}
 
 		// 홈으로 이동하는 함수
-	    function goToHome() {
+	    /* function goToHome() {
 	      window.location.href = 'main.jsp';
-	    }
+	    } */
 		
 	</script>
 </body>
