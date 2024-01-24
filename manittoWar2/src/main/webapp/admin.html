@@ -15,15 +15,23 @@ body {
 }
 
 button {
+	text-align: center;	
 	font-size: 2vw;
 	padding: 1.5vw 3vw;
 	margin: 2vh 0;
-	background-color: #3498db;
+	background-color: #FF6868;
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
+	
 }
+
+button:hover {
+    background-color: #FFB996; /* 호버될 때의 배경색 */
+    color: #fff; /* 호버될 때의 텍스트 색상 */
+}
+
 
 table-container {
 	max-height: 70vh;
@@ -51,15 +59,14 @@ th {
 </head>
 <body>
 	
-
 	<h2>관리자 페이지</h2>
 	<div class="img-container">
 		<img alt="" src="images/giftbox_close.gif" width="200" height="200">
 	</div>
 	<div class="button-container">
-		<button type="button" onclick="createManitto()">마니또 생성하기</button>
+		<button type="button" onclick="createManitto()">마니또 생성</button>
 		<button class="button" onclick="goToPage('writeBoard.html')">편지
-			게시하기</button>
+			게시</button>
 		<button class="button" onclick="goToPage('readBoard')">편지 보기</button>
 	</div>
 	<div id="allView"></div>

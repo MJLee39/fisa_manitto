@@ -7,59 +7,76 @@
 <meta charset="UTF-8">
 <title>게시판 조회</title>
 <style>
+
 /* 기존 CSS */
 body {
-	font-family: Arial, sans-serif;
-	text-align: center;
-	background-color: #f4f4f4;
-	margin: 0;
-	padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
 }
 
 h2 {
-	margin-top: 20px;
+    margin-top: 20px;
+    color: #333;
 }
 
 table {
-	width: 80%;
-	margin: 20px auto;
-	border-collapse: collapse;
-	border: 1px solid #dddddd;
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    border: 1px solid #dddddd;
 }
 
 th, td {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
 }
 
 th {
-	background-color: #f2f2f2;
+    background-color: #f2f2f2;
+}
+
+button:hover {
+    background-color: #FFB996;
+    color: #fff;
+}
+
+.myPageButton,
+.homeButton {
+    padding: 10px 20px;
+    background-color: #FF6868;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: absolute;
+    top: 20px;
 }
 
 .myPageButton {
-	padding: 10px 20px;
-	background-color: #3498db;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	position: absolute;
-	top: 20px;
-	right: 20px;
+    right: 20px;
 }
 
 .homeButton {
-	padding: 10px 20px;
-	background-color: #3498db;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	position: absolute;
-	top: 20px;
-	left: 20px;
+    left: 20px;
 }
+
+.message {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.message p {
+    margin: 0;
+    color: #555;
+}
+
 </style>
 </head>
 <body>
@@ -89,14 +106,14 @@ th {
 	</c:if>
 
 	<button class="myPageButton" onclick="goToMyPage()">마이페이지</button>
-	<!-- <button class="homeButton" onclick="goToHome()">홈</button>  -->
+	<button class="homeButton" onclick="goToHome()">홈</button>
 
 	<script>
 
 	 // 홈으로 이동하는 함수
-    /* function goToHome() {
+    function goToHome() {
       window.location.href = 'main.jsp';
-    } */
+    }
 	
     // 마이페이지로 이동하는 함수
     function goToMyPage() {

@@ -15,10 +15,9 @@
 	margin-top: 20px;
 }
 
-
 .button {
 	padding: 10px 20px;
-	background-color: #3498db;
+	background-color: #FF6868;
 	color: white;
 	border: none;
 	border-radius: 5px;
@@ -26,6 +25,11 @@
 	width: 200px;
 	height: 40px;
 	margin: 5px;
+}
+
+button:hover {
+    background-color: #FFB996;
+    color: #fff; 
 }
 
 .img-container {
@@ -38,37 +42,24 @@ h2 {
 
 /* 새로운 CSS */
 #hideButton {
-	margin-top: 20px;
-	padding: 10px 20px;
-	background-color: #3498db;
-	color: white;
-	border: none;
-	border-radius: 5px;
-	cursor: pointer;
-	width: 200px;
-	height: 40px;
+	display: inline-block;
+ 	padding: 5px 10px;
+ 	font-size: 16px;
+  	text-align: center;
+  	text-decoration: none;
+  	background-color: #294B29;
+ 	color: white;
+  	border: none;
+  	border-radius: 5px;
+  	cursor: pointer;
+  	transition: background-color 0.3s ease;
 }
 
 /* 수정된 CSS: 흐림 효과 제거 및 대비 향상 */
 body {
-	filter: none; /* 흐림 효과 제거 */
+	filter: none; 
 }
-.button {
-  display: inline-block;
-  padding: 5px 10px;
-  font-size: 16px;
-  text-align: center;
-  text-decoration: none;
-  background-color: #3498DB;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-.button:hover {
-	background-color: #45A049; /* 호버 시 버튼 배경색 변경 */
-}
+
 </style>
 </head>
 

@@ -40,15 +40,21 @@ img {
 	top: 20px;
 	right: 20px;
 	padding: 10px 20px;
-	background-color: #3498db;
+	background-color: #FF6868;
 	color: white;
 	border: none;
 	border-radius: 5px;
 	cursor: pointer;
 }
+
+button:hover {
+    background-color: #FFB996;
+    color: #fff; 
+}
+
 .homeButton {
 	padding: 10px 20px;
-	background-color: #3498db;
+	background-color: #FF6868;
 	color: white;
 	border: none;
 	border-radius: 5px;
